@@ -1,0 +1,25 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "[![Actions Status](https://github.com/TatuAnat/qa-auto-engineer-javascript-project-87/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/TatuAnat/qa-auto-engineer-javascript-project-87/actions)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TatuAnat/qa-auto-engineer-javascript-project-87.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TatuAnat/qa-auto-engineer-javascript-project-87/issues"
+  },
+  "homepage": "https://github.com/TatuAnat/qa-auto-engineer-javascript-project-87#readme",
+  "dependencies": {
+    "commander": "^14.0.2"
+  }
+}
