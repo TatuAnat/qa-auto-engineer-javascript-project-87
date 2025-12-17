@@ -1,4 +1,5 @@
 import parseFile from './parseFile.js'
+import sortBy from 'lodash/sortBy.js'
 
 const formatValue = (value) => {
   if (value === null) return 'null'
@@ -10,7 +11,7 @@ const genDiff = (filepath1, filepath2, outputFormat = 'stylish') => {
   const data1 = parseFile(filepath1)
   const data2 = parseFile(filepath2)
 
-  const keys = Array.from(new Set([...Object.keys(data1), ...Object.keys(data2)])).sort()
+  const keys = sortBy(Array.from(new Set([...Object.keys(data1), ...Object.keys(data2)])))
 
   const lines = keys.flatMap((key) => {
     const has1 = Object.prototype.hasOwnProperty.call(data1, key)
