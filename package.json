@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/TatuAnat/qa-auto-engineer-javascript-project-87#readme",
   "dependencies": {
-    "commander": "^14.0.2"
+    "commander": "^14.0.2",
+    "lodash": "^4.17.21"
   }
 }
+
