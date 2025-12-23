@@ -17,7 +17,8 @@ program
 
     try {
       console.log(genDiff(resolved1, resolved2, program.opts().format))
-    } catch (err) {
+    }
+    catch (err) {
       console.error(err.message)
       process.exit(1)
     }

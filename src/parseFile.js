@@ -8,8 +8,9 @@ const parseFile = (filepath) => {
   if (ext === '.json') {
     try {
       return JSON.parse(content)
-    } catch (err) {
-      throw new Error(`Failed to parse JSON file: ${filepath}`)
+    }
+    catch (err) {
+      throw new Error(`Failed to parse JSON file: ${filepath} error: ${err.message}`)
     }
   }
 

@@ -7,7 +7,7 @@ const formatValue = (value) => {
   return String(value)
 }
 
-const genDiff = (filepath1, filepath2, outputFormat = 'stylish') => {
+const genDiff = (filepath1, filepath2) => {
   const data1 = parseFile(filepath1)
   const data2 = parseFile(filepath2)
 
