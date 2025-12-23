@@ -4,7 +4,7 @@ export default {
   // Тестовые файлы
   testMatch: ['**/__tests__/**/*.test.js'],
   // Генерация покрытия кода
-  collectCoverage: false,
+  collectCoverage: true,
   coverageDirectory: 'coverage', // папка для отчётов
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
 
