@@ -1,10 +1,14 @@
-import path from 'path'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import genDiff from '../src/index.js'
 
-const getFixturePath = (filename) =>
-  path.join(process.cwd(), '__fixtures__', filename)
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-describe('genDiff (flat json)', () => {
+const getFixturePath = (filename) =>
+  path.join(__dirname, '..', '__fixtures__', filename)
+
+describe('genDiff ', () => {
   test('no differences', () => {
     const file1 = getFixturePath('file1.json')
     const file2 = getFixturePath('file2.json')
@@ -36,8 +40,8 @@ describe('genDiff (flat json)', () => {
     const file2 = getFixturePath('removed.json')
 
     const expected = `{
-  - verbose: true
     timeout: 50
+  - verbose: true
 }`
 
     expect(genDiff(file1, file2)).toBe(expected)
@@ -48,8 +52,8 @@ describe('genDiff (flat json)', () => {
     const file2 = getFixturePath('changed.json')
 
     const expected = `{
-    follow: false
-    host: hexlet.io
+  - follow: false
+  - host: hexlet.io
   - proxy: 123.234.53.22
   + proxy: null
   - timeout: 50
