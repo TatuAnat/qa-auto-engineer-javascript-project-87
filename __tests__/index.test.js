@@ -92,3 +92,51 @@ describe('parseFile', () => {
     expect(() => parseFile(invalidYamlPath)).toThrow('Failed to parse YAML file')
   })
 })
+
+describe('genDiff plain format', () => {
+  test('plain format with json files', () => {
+    const file1 = getFixturePath('file1.json')
+    const file2 = getFixturePath('changed.json')
+
+    const expected = [
+      "Property 'follow' was removed",
+      "Property 'host' was removed",
+      "Property 'proxy' was updated. From '123.234.53.22' to null",
+      "Property 'timeout' was updated. From 50 to 20",
+    ].join('\n')
+
+    expect(genDiff(file1, file2, 'plain')).toBe(expected)
+  })
+
+  test('plain format with added key', () => {
+    const file1 = getFixturePath('removed.json')
+    const file2 = getFixturePath('added.json')
+
+    const expected = "Property 'verbose' was added with value: true"
+
+    expect(genDiff(file1, file2, 'plain')).toBe(expected)
+  })
+
+  test('plain format with removed key', () => {
+    const file1 = getFixturePath('added.json')
+    const file2 = getFixturePath('removed.json')
+
+    const expected = "Property 'verbose' was removed"
+
+    expect(genDiff(file1, file2, 'plain')).toBe(expected)
+  })
+
+  test('plain format with yaml files', () => {
+    const file1 = getFixturePath('file1.yml')
+    const file2 = getFixturePath('file2.yml')
+
+    const expected = [
+      "Property 'follow' was removed",
+      "Property 'proxy' was removed",
+      "Property 'timeout' was updated. From 50 to 20",
+      "Property 'verbose' was added with value: true",
+    ].join('\n')
+
+    expect(genDiff(file1, file2, 'plain')).toBe(expected)
+  })
+})
