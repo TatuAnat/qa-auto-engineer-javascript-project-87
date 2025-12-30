@@ -1,6 +1,7 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import genDiff from '../src/index.js'
+import parseFile from '../src/parseFile.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -61,5 +62,33 @@ describe('genDiff ', () => {
 }`
 
     expect(genDiff(file1, file2)).toBe(expected)
+  })
+
+  test('compare flat yaml files', () => {
+    const file1 = getFixturePath('file1.yml')
+    const file2 = getFixturePath('file2.yml')
+
+    const expected = `{
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
+}`
+
+    expect(genDiff(file1, file2)).toBe(expected)
+  })
+})
+
+describe('parseFile', () => {
+  test('throws error for invalid JSON', () => {
+    const invalidJsonPath = getFixturePath('invalid.json')
+    expect(() => parseFile(invalidJsonPath)).toThrow('Failed to parse JSON file')
+  })
+
+  test('throws error for invalid YAML', () => {
+    const invalidYamlPath = getFixturePath('invalid.yml')
+    expect(() => parseFile(invalidYamlPath)).toThrow('Failed to parse YAML file')
   })
 })

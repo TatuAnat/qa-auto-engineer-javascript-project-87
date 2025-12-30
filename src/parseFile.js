@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-
+import yaml from 'js-yaml'
 const parseFile = (filepath) => {
   const content = fs.readFileSync(filepath, 'utf8')
   const ext = path.extname(filepath).toLowerCase()
@@ -15,7 +15,12 @@ const parseFile = (filepath) => {
   }
 
   if (ext === '.yml' || ext === '.yaml') {
-    throw new Error('YAML parsing not implemented. Only JSON supported in this task.')
+    try {
+      return yaml.load(content)
+    }
+    catch (err) {
+      throw new Error('Failed to parse YAML file' + filepath + ' error: ' + err.message)
+    }
   }
 
   throw new Error(`Unsupported file type: ${ext}`)
