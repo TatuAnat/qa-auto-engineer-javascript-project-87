@@ -99,10 +99,10 @@ describe('genDiff plain format', () => {
     const file2 = getFixturePath('changed.json')
 
     const expected = [
-      "Property 'follow' was removed",
-      "Property 'host' was removed",
-      "Property 'proxy' was updated. From '123.234.53.22' to null",
-      "Property 'timeout' was updated. From 50 to 20",
+      'Property \'follow\' was removed',
+      'Property \'host\' was removed',
+      'Property \'proxy\' was updated. From \'123.234.53.22\' to null',
+      'Property \'timeout\' was updated. From 50 to 20',
     ].join('\n')
 
     expect(genDiff(file1, file2, 'plain')).toBe(expected)
@@ -112,7 +112,7 @@ describe('genDiff plain format', () => {
     const file1 = getFixturePath('removed.json')
     const file2 = getFixturePath('added.json')
 
-    const expected = "Property 'verbose' was added with value: true"
+    const expected = 'Property \'verbose\' was added with value: true'
 
     expect(genDiff(file1, file2, 'plain')).toBe(expected)
   })
@@ -121,7 +121,7 @@ describe('genDiff plain format', () => {
     const file1 = getFixturePath('added.json')
     const file2 = getFixturePath('removed.json')
 
-    const expected = "Property 'verbose' was removed"
+    const expected = 'Property \'verbose\' was removed'
 
     expect(genDiff(file1, file2, 'plain')).toBe(expected)
   })
@@ -131,10 +131,10 @@ describe('genDiff plain format', () => {
     const file2 = getFixturePath('file2.yml')
 
     const expected = [
-      "Property 'follow' was removed",
-      "Property 'proxy' was removed",
-      "Property 'timeout' was updated. From 50 to 20",
-      "Property 'verbose' was added with value: true",
+      'Property \'follow\' was removed',
+      'Property \'proxy\' was removed',
+      'Property \'timeout\' was updated. From 50 to 20',
+      'Property \'verbose\' was added with value: true',
     ].join('\n')
 
     expect(genDiff(file1, file2, 'plain')).toBe(expected)

@@ -57,9 +57,9 @@ const formatStylish = (diff) => {
   return ['{', ...lines, '}'].join('\n')
 }
 
-const formatPlain = (diff) =>
+const formatPlain = diff =>
   diff
-    .filter((node) => node.type !== 'unchanged')
+    .filter(node => node.type !== 'unchanged')
     .map((node) => {
       switch (node.type) {
         case 'added':
