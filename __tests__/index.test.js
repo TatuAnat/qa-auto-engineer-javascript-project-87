@@ -17,7 +17,7 @@ describe('genDiff ', () => {
     const expected = `{
     follow: false
     host: hexlet.io
-    proxy: 123.234.53.22
+    proxy: 1.2.3.4
     timeout: 50
 }`
 
@@ -55,7 +55,7 @@ describe('genDiff ', () => {
     const expected = `{
   - follow: false
   - host: hexlet.io
-  - proxy: 123.234.53.22
+  - proxy: 1.2.3.4
   + proxy: null
   - timeout: 50
   + timeout: 20
@@ -71,7 +71,7 @@ describe('genDiff ', () => {
     const expected = `{
   - follow: false
     host: hexlet.io
-  - proxy: 123.234.53.22
+  - proxy: 1.2.3.4
   - timeout: 50
   + timeout: 20
   + verbose: true
@@ -101,7 +101,7 @@ describe('genDiff plain format', () => {
     const expected = [
       'Property \'follow\' was removed',
       'Property \'host\' was removed',
-      'Property \'proxy\' was updated. From \'123.234.53.22\' to null',
+      'Property \'proxy\' was updated. From \'1.2.3.4\' to null',
       'Property \'timeout\' was updated. From 50 to 20',
     ].join('\n')
 
@@ -149,7 +149,7 @@ describe('genDiff JSON format', () => {
     const expected = {
       follow: { status: 'removed', value: false },
       host: { status: 'removed', value: 'hexlet.io' },
-      proxy: { status: 'updated', oldValue: '123.234.53.22', newValue: null },
+      proxy: { status: 'updated', oldValue: '1.2.3.4', newValue: null },
       timeout: { status: 'updated', oldValue: 50, newValue: 20 },
     }
 
@@ -187,7 +187,7 @@ describe('genDiff JSON format', () => {
     const expected = {
       follow: { status: 'removed', value: false },
       host: { status: 'unchanged', value: 'hexlet.io' },
-      proxy: { status: 'removed', value: '123.234.53.22' },
+      proxy: { status: 'removed', value: '1.2.3.4' },
       timeout: { status: 'updated', oldValue: 50, newValue: 20 },
       verbose: { status: 'added', value: true },
     }
