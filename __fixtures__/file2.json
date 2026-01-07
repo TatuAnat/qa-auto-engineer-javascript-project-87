@@ -2,5 +2,5 @@
   "timeout": 50,
   "host": "hexlet.io",
   "follow": false,
-  "proxy": "1.2.3.4"
+  "proxy": "a.b.c.d"
 }

@@ -1,4 +1,4 @@
 host: hexlet.io
 timeout: 50
-proxy: 1.2.3.4
+proxy: a.b.c.d
 follow: false

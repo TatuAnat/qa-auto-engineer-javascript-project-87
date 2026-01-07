@@ -28,7 +28,7 @@ node ./bin/gendiff.js ./file1.json ./file2.json
 {
 	- follow: false
 		host: hexlet.io
-	- proxy: 1.2.3.4
+	- proxy: a.b.c.d
 	- timeout: 50
 	+ timeout: 20
 	+ verbose: true
