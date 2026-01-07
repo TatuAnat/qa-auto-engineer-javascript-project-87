@@ -140,3 +140,58 @@ describe('genDiff plain format', () => {
     expect(genDiff(file1, file2, 'plain')).toBe(expected)
   })
 })
+
+describe('genDiff JSON format', () => {
+  test('json format with json files', () => {
+    const file1 = getFixturePath('file1.json')
+    const file2 = getFixturePath('changed.json')
+
+    const expected = {
+      follow: { status: 'removed', value: false },
+      host: { status: 'removed', value: 'hexlet.io' },
+      proxy: { status: 'updated', oldValue: '123.234.53.22', newValue: null },
+      timeout: { status: 'updated', oldValue: 50, newValue: 20 },
+    }
+
+    expect(JSON.parse(genDiff(file1, file2, 'json'))).toEqual(expected)
+  })
+
+  test('json format with added key', () => {
+    const file1 = getFixturePath('removed.json')
+    const file2 = getFixturePath('added.json')
+
+    const expected = {
+      timeout: { status: 'unchanged', value: 50 },
+      verbose: { status: 'added', value: true },
+    }
+
+    expect(JSON.parse(genDiff(file1, file2, 'json'))).toEqual(expected)
+  })
+
+  test('json format with removed key', () => {
+    const file1 = getFixturePath('added.json')
+    const file2 = getFixturePath('removed.json')
+
+    const expected = {
+      timeout: { status: 'unchanged', value: 50 },
+      verbose: { status: 'removed', value: true },
+    }
+
+    expect(JSON.parse(genDiff(file1, file2, 'json'))).toEqual(expected)
+  })
+
+  test('json format with yaml files', () => {
+    const file1 = getFixturePath('file1.yml')
+    const file2 = getFixturePath('file2.yml')
+
+    const expected = {
+      follow: { status: 'removed', value: false },
+      host: { status: 'unchanged', value: 'hexlet.io' },
+      proxy: { status: 'removed', value: '123.234.53.22' },
+      timeout: { status: 'updated', oldValue: 50, newValue: 20 },
+      verbose: { status: 'added', value: true },
+    }
+
+    expect(JSON.parse(genDiff(file1, file2, 'json'))).toEqual(expected)
+  })
+})

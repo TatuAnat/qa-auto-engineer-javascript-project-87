@@ -53,3 +53,4 @@ console.log(result)
 ## Demo: Gendiff
 
 [![asciicast](https://asciinema.org/a/764880.svg)](https://asciinema.org/a/764880)
+[![asciicast](https://asciinema.org/a/766439.svg)](https://asciinema.org/a/766439)

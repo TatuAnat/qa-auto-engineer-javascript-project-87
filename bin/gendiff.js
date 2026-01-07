@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander'
-import path from 'path'
+import path from 'node:path'
 import genDiff from '../src/index.js'
 
 const program = new Command()
@@ -16,7 +16,13 @@ program
     const resolved2 = path.resolve(process.cwd(), filepath2)
 
     try {
-      console.log(genDiff(resolved1, resolved2, program.opts().format))
+      const result = genDiff(resolved1, resolved2, program.opts().format)
+      if (program.opts().format === 'json') {
+        console.log(JSON.stringify(result, null, 2))
+      }
+      else {
+        console.log(result)
+      }
     }
     catch (err) {
       console.error(err.message)
