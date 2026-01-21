@@ -5,12 +5,12 @@ const formatValue = (value) => {
 }
 
 const formatStylish = (diff) => {
-  const lines = diff.map((item) => {
+  const lines = diff.flatMap((item) => {
     if (item.status === 'removed') {
-      return `  - ${item.key}: ${formatValue(item.value)}`
+      return [`  - ${item.key}: ${formatValue(item.value)}`]
     }
     if (item.status === 'added') {
-      return `  + ${item.key}: ${formatValue(item.value)}`
+      return [`  + ${item.key}: ${formatValue(item.value)}`]
     }
     if (item.status === 'updated') {
       return [
@@ -18,8 +18,8 @@ const formatStylish = (diff) => {
         `  + ${item.key}: ${formatValue(item.newValue)}`,
       ]
     }
-    return `    ${item.key}: ${formatValue(item.value)}`
-  }).flat()
+    return [`    ${item.key}: ${formatValue(item.value)}`]
+  })
 
   return ['{', ...lines, '}'].join('\n')
 }
