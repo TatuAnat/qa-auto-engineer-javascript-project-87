@@ -1,7 +1,7 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "[![Actions Status](https://github.com/TatuAnat/qa-auto-engineer-javascript-project-87/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/TatuAnat/qa-auto-engineer-javascript-project-87/actions)",
+  "description": "Простой инструмент для сравнения двух плоских JSON-файлов",
   "type": "module",
   "main": "src/index.js",
   "simple-git-hooks": {
@@ -30,20 +30,19 @@
   },
   "homepage": "https://github.com/TatuAnat/qa-auto-engineer-javascript-project-87#readme",
   "dependencies": {
-    "@eslint/js": "^9.39.2",
-    "@stylistic/eslint-plugin": "^5.6.1",
     "commander": "^14.0.2",
-    "eslint": "^9.39.2",
-    "globals": "^16.5.0",
-    "jest": "^30.2.0",
     "js-yaml": "^4.1.1",
-    "lodash": "^4.17.21",
-    "path": "^0.12.7",
-    "simple-git-hooks": "^2.13.1"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@babel/core": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
-    "babel-jest": "^30.2.0"
+    "@eslint/js": "^9.39.2",
+    "@stylistic/eslint-plugin": "^5.6.1",
+    "babel-jest": "^30.2.0",
+    "eslint": "^9.39.2",
+    "globals": "^16.5.0",
+    "jest": "^30.2.0",
+    "simple-git-hooks": "^2.13.1"
   }
 }

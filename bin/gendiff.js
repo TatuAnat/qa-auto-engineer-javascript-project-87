@@ -17,12 +17,7 @@ program
 
     try {
       const result = genDiff(resolved1, resolved2, program.opts().format)
-      if (program.opts().format === 'json') {
-        console.log(JSON.stringify(result, null, 2))
-      }
-      else {
-        console.log(result)
-      }
+      console.log(result)
     }
     catch (err) {
       console.error(err.message)

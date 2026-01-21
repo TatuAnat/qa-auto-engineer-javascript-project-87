@@ -1,0 +1,10 @@
+{
+  "timeout": {
+    "status": "unchanged",
+    "value": 50
+  },
+  "verbose": {
+    "status": "added",
+    "value": true
+  }
+}

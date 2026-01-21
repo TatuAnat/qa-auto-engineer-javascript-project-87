@@ -1,8 +1,10 @@
 ### Hexlet tests and linter status:
+
 [![Actions Status](https://github.com/TatuAnat/qa-auto-engineer-javascript-project-87/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/TatuAnat/qa-auto-engineer-javascript-project-87/actions)
 
-
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=TatuAnat_qa-auto-engineer-javascript-project-87&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=TatuAnat_qa-auto-engineer-javascript-project-87)
+
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=TatuAnat_qa-auto-engineer-javascript-project-87&metric=coverage)](https://sonarcloud.io/summary/new_code?id=TatuAnat_qa-auto-engineer-javascript-project-87)
 
 # gendiff
 
@@ -38,19 +40,21 @@ node ./bin/gendiff.js ./file1.json ./file2.json
 ## Использование как библиотеки
 
 ```js
-import genDiff from './src/index.js'
+import genDiff from "./src/index.js";
 
-const result = genDiff('./file1.json', './file2.json')
-console.log(result)
+const result = genDiff("./file1.json", "./file2.json");
+console.log(result);
 ```
 
 ## Примечания
+
 - Поддерживается только плоский JSON (ключ-значение) — формат определяется по расширению файла.
 - Для сортировки ключей используется `lodash`.
 - Для работы с файлами используются синхронные функции `fs`.
-
 
 ## Demo: Gendiff
 
 [![asciicast](https://asciinema.org/a/764880.svg)](https://asciinema.org/a/764880)
 [![asciicast](https://asciinema.org/a/766439.svg)](https://asciinema.org/a/766439)
+
+...
