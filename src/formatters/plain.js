@@ -7,7 +7,7 @@ const formatValue = (value) => {
 
 const formatPlain = (diff) => {
   const changes = diff
-    .filter((item) => item.status !== 'unchanged')
+    .filter(item => item.status !== 'unchanged')
     .map((item) => {
       if (item.status === 'removed') {
         return `Property '${item.key}' was removed`

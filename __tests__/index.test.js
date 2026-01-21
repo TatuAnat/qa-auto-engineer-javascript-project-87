@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename)
 const getFixturePath = filename =>
   path.join(__dirname, '..', '__fixtures__', filename)
 
-const readExpected = filename => {
+const readExpected = (filename) => {
   const filePath = getFixturePath(filename)
   return readFileSync(filePath, 'utf-8').trim()
 }
@@ -42,8 +42,6 @@ describe('genDiff JSON files', () => {
   })
 
   describe('no difference', () => {
-
-
     const filepath1 = getFixturePath('same1.json')
     const filepath2 = getFixturePath('same2.json')
 
@@ -61,8 +59,6 @@ describe('genDiff JSON files', () => {
   describe('addd key', () => {
     const filepath1 = getFixturePath('removed.json')
     const filepath2 = getFixturePath('added.json')
-
-
 
     const stylishExpected = readExpected('expected_added_key_stylish.txt')
     const plainExpected = readExpected('expected_added_key_plain.txt')
@@ -102,8 +98,6 @@ describe('genDiff JSON files', () => {
     test('json -> styish', () => {
       expect(genDiff(filepath1, filepath2, 'stylish')).toBe(stylishExpected)
     })
-
-
 
     test('json -> plian', () => {
       expect(genDiff(filepath1, filepath2, 'plain')).toBe(plainExpected)
@@ -149,15 +143,9 @@ describe('genDiff YML files', () => {
   const plainExpected = readExpected('expected_yaml_plain.txt')
   const jsonExpected = JSON.parse(readExpected('expected_yaml_json.txt'))
 
-
-
-
   test('yml -> default (stylish)', () => {
     expect(genDiff(filepath1, filepath2)).toBe(stylishExpected)
   })
-
-
-
 
   test('yml -> stylish', () => {
     expect(genDiff(filepath1, filepath2, 'stylish')).toBe(stylishExpected)
@@ -173,14 +161,10 @@ describe('genDiff YML files', () => {
 })
 
 describe('getData', () => {
-
-
   test('throws eror for invalid JSON', () => {
     const invalidJsonPath = getFixturePath('invalid.json')
     expect(() => getData(invalidJsonPath)).toThrow('Failed to parse JSON file')
   })
-
-
 
   test('throws error for invalid YAML', () => {
     const invalidYamlPath = getFixturePath('invalid.yml')
