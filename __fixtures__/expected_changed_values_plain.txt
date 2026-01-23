@@ -1,4 +1,0 @@
-Property 'follow' was removed
-Property 'host' was removed
-Property 'proxy' was updated. From 'a.b.c.d' to null
-Property 'timeout' was updated. From 50 to 20

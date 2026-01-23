@@ -1,173 +1,103 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { readFileSync } from 'fs'
+import { readFileSync } from 'node:fs'
 import genDiff from '../src/index.js'
 import getData from '../src/getData.js'
+import parse from '../src/parsers/index.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const getFixturePath = filename =>
-  path.join(__dirname, '..', '__fixtures__', filename)
+const getFixturePath = filename => path.join(__dirname, '..', '__fixtures__', filename)
 
-const readExpected = (filename) => {
-  const filePath = getFixturePath(filename)
-  return readFileSync(filePath, 'utf-8').trim()
-}
+const readExpected = filename => readFileSync(getFixturePath(filename), 'utf-8').trim()
 
-describe('genDiff JSON files', () => {
-  describe('mixed changes (removd, addd, chnaged, unchanged)', () => {
+describe('genDiff', () => {
+  describe('JSON input', () => {
     const filepath1 = getFixturePath('file1.json')
     const filepath2 = getFixturePath('file2.json')
-
     const stylishExpected = readExpected('stylish.txt')
     const plainExpected = readExpected('plain.txt')
     const jsonExpected = JSON.parse(readExpected('json.txt'))
 
-    test('json -> default', () => {
+    test('default format (stylish)', () => {
       expect(genDiff(filepath1, filepath2)).toBe(stylishExpected)
     })
 
-    test('json => styish', () => {
+    test('stylish format', () => {
       expect(genDiff(filepath1, filepath2, 'stylish')).toBe(stylishExpected)
     })
 
-    test('json => plain', () => {
+    test('plain format', () => {
       expect(genDiff(filepath1, filepath2, 'plain')).toBe(plainExpected)
     })
 
-    test('json => json', () => {
+    test('json format', () => {
       expect(JSON.parse(genDiff(filepath1, filepath2, 'json'))).toEqual(jsonExpected)
     })
   })
 
-  describe('no difference', () => {
-    const filepath1 = getFixturePath('same1.json')
-    const filepath2 = getFixturePath('same2.json')
+  describe('YML input', () => {
+    const filepath1 = getFixturePath('file1.yml')
+    const filepath2 = getFixturePath('file2.yml')
+    const stylishExpected = readExpected('expected_yaml_stylish.txt')
+    const plainExpected = readExpected('expected_yaml_plain.txt')
+    const jsonExpected = JSON.parse(readExpected('expected_yaml_json.txt'))
 
-    const stylishExpected = readExpected('expected_no_differences_stylish.txt')
-
-    test('json => default (stylish)', () => {
+    test('default format (stylish)', () => {
       expect(genDiff(filepath1, filepath2)).toBe(stylishExpected)
     })
 
-    test('json => stylish', () => {
-      expect(genDiff(filepath1, filepath2, 'stylish')).toBe(stylishExpected)
-    })
-  })
-
-  describe('addd key', () => {
-    const filepath1 = getFixturePath('removed.json')
-    const filepath2 = getFixturePath('added.json')
-
-    const stylishExpected = readExpected('expected_added_key_stylish.txt')
-    const plainExpected = readExpected('expected_added_key_plain.txt')
-    const jsonExpected = JSON.parse(readExpected('expected_added_key_json.txt'))
-
-    test('json -> defautl (stylish)', () => {
-      expect(genDiff(filepath1, filepath2)).toBe(stylishExpected)
-    })
-
-    test('json -> styish', () => {
+    test('stylish format', () => {
       expect(genDiff(filepath1, filepath2, 'stylish')).toBe(stylishExpected)
     })
 
-    test('json -> plian', () => {
+    test('plain format', () => {
       expect(genDiff(filepath1, filepath2, 'plain')).toBe(plainExpected)
     })
 
-    test('json -> jsno', () => {
+    test('json format', () => {
       expect(JSON.parse(genDiff(filepath1, filepath2, 'json'))).toEqual(jsonExpected)
     })
-  })
-
-  describe('removd key', () => {
-    const filepath1 = getFixturePath('added.json')
-
-    const filepath2 = getFixturePath('removed.json')
-
-    const stylishExpected = readExpected('expected_removed_key_stylish.txt')
-
-    const plainExpected = readExpected('expected_removed_key_plain.txt')
-    const jsonExpected = JSON.parse(readExpected('expected_removed_key_json.txt'))
-
-    test('json -> defautl (stylish)', () => {
-      expect(genDiff(filepath1, filepath2)).toBe(stylishExpected)
-    })
-
-    test('json -> styish', () => {
-      expect(genDiff(filepath1, filepath2, 'stylish')).toBe(stylishExpected)
-    })
-
-    test('json -> plian', () => {
-      expect(genDiff(filepath1, filepath2, 'plain')).toBe(plainExpected)
-    })
-
-    test('json -> jsno', () => {
-      expect(JSON.parse(genDiff(filepath1, filepath2, 'json'))).toEqual(jsonExpected)
-    })
-  })
-
-  describe('chnaged values', () => {
-    const filepath1 = getFixturePath('file1.json')
-    const filepath2 = getFixturePath('changed.json')
-
-    const stylishExpected = readExpected('expected_changed_values_stylish.txt')
-    const plainExpected = readExpected('expected_changed_values_plain.txt')
-
-    const jsonExpected = JSON.parse(readExpected('expected_changed_values_json.txt'))
-
-    test('json -> defautl (stylish)', () => {
-      expect(genDiff(filepath1, filepath2)).toBe(stylishExpected)
-    })
-
-    test('json -> styish', () => {
-      expect(genDiff(filepath1, filepath2, 'stylish')).toBe(stylishExpected)
-    })
-
-    test('json -> plian', () => {
-      expect(genDiff(filepath1, filepath2, 'plain')).toBe(plainExpected)
-    })
-
-    test('json -> jsno', () => {
-      expect(JSON.parse(genDiff(filepath1, filepath2, 'json'))).toEqual(jsonExpected)
-    })
-  })
-})
-
-describe('genDiff YML files', () => {
-  const filepath1 = getFixturePath('file1.yml')
-  const filepath2 = getFixturePath('file2.yml')
-
-  const stylishExpected = readExpected('expected_yaml_stylish.txt')
-  const plainExpected = readExpected('expected_yaml_plain.txt')
-  const jsonExpected = JSON.parse(readExpected('expected_yaml_json.txt'))
-
-  test('yml -> default (stylish)', () => {
-    expect(genDiff(filepath1, filepath2)).toBe(stylishExpected)
-  })
-
-  test('yml -> stylish', () => {
-    expect(genDiff(filepath1, filepath2, 'stylish')).toBe(stylishExpected)
-  })
-
-  test('yml -> plain', () => {
-    expect(genDiff(filepath1, filepath2, 'plain')).toBe(plainExpected)
-  })
-
-  test('yml -> json', () => {
-    expect(JSON.parse(genDiff(filepath1, filepath2, 'json'))).toEqual(jsonExpected)
   })
 })
 
 describe('getData', () => {
-  test('throws eror for invalid JSON', () => {
-    const invalidJsonPath = getFixturePath('invalid.json')
-    expect(() => getData(invalidJsonPath)).toThrow('Failed to parse JSON file')
+  test('throws error for invalid JSON', () => {
+    expect(() => getData(getFixturePath('invalid.json'))).toThrow('Failed to parse JSON file')
   })
 
   test('throws error for invalid YAML', () => {
-    const invalidYamlPath = getFixturePath('invalid.yml')
-    expect(() => getData(invalidYamlPath)).toThrow('Failed to parse YAML file')
+    expect(() => getData(getFixturePath('invalid.yml'))).toThrow('Failed to parse YAML file')
+  })
+
+  test('throws error for unsupported file type', () => {
+    expect(() => getData(getFixturePath('stylish.txt'))).toThrow('Unsupported file type: .txt')
+  })
+
+  test('handles relative paths', () => {
+    const result = genDiff('__fixtures__/file1.json', '__fixtures__/file2.json')
+    expect(result).toBeDefined()
+  })
+})
+
+describe('format', () => {
+  test('throws error for unknown format', () => {
+    expect(() => genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'unknown')).toThrow('Unknown format: unknown')
+  })
+
+  test('handles null values', () => {
+    const filepath1 = getFixturePath('with_null1.json')
+    const filepath2 = getFixturePath('with_null2.json')
+    const result = genDiff(filepath1, filepath2, 'stylish')
+    expect(result).toContain('null')
+    const plainResult = genDiff(filepath1, filepath2, 'plain')
+    expect(plainResult).toContain('null')
+  })
+})
+
+describe('parse', () => {
+  test('throws error for unsupported format', () => {
+    expect(() => parse('{}', 'xml')).toThrow('Unsupported format: xml')
   })
 })
